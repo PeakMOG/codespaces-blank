@@ -11,6 +11,13 @@ root.resizable(False, False)
 root.geometry('550x250')
 
 
+def clear_text_reader():
+    t = open("text-reader.txt", "w", encoding="utf-8")
+    t.flush()
+    t.close()
+    print("Fisierul text-reader este gol!")
+    
+
 def open_file():
     filetypes = (
         ('pdf files', '*.pdf'),
@@ -36,14 +43,12 @@ def open_file():
             # Printing the line
             # Lines are separated using "\n"
             print(text[i], end="\n")
-        t=open("textpdf.txt", "r+", encoding="utf-8")
-        t.flush()
-        t.writelines(text)
-        t.close()
         # For Separating the Pages
         print()
-
-
+        t=open("textpdf.txt", "r+", encoding="utf-8")
+        t.writelines(text)
+        t.close()
+        
 
  # open file button
 open_button = ttk.Button(
@@ -52,7 +57,14 @@ open_button = ttk.Button(
     command=open_file
 )
 
-open_button.grid(column=0, row=1, sticky='w', padx=10, pady=10)
+# clear file text-reader
+clear_button = ttk.Button(
+    root,
+    text='Clear text-reader',
+    command=clear_text_reader
+)
 
+open_button.grid(column=0, row=1, sticky='w', padx=10, pady=10)
+clear_button.grid(column=0, row=2, sticky='w', padx=10, pady=10)
 
 root.mainloop()
