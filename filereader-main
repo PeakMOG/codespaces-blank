@@ -2,21 +2,16 @@ import PyPDF2
 import tkinter as tk
 from tkinter import ttk
 from tkinter import filedialog as fd
+from textexcel import * #import function from other file
+
 
 
 # Root window
 root = tk.Tk()
-root.title('Display a Text File')
+root.title('Work a Text File')
 root.resizable(False, False)
 root.geometry('550x250')
 
-
-def clear_text_reader():
-    t = open("text-reader.txt", "w", encoding="utf-8")
-    t.flush()
-    t.close()
-    print("Fisierul text-reader este gol!")
-    
 
 def open_file():
     filetypes = (
@@ -33,7 +28,7 @@ def open_file():
         # Creating a page object
         pdfobj = pdfreader.pages[i]
         # Printing Page Number
-        print("Page number: ", i)
+        print("Page number: ", i, "\n")
         # Extracting text from page
         # And splitting it into chunks of lines
         text = pdfobj.extract_text().split("  ")
@@ -42,15 +37,23 @@ def open_file():
         for i in range(len(text)):
             # Printing the line
             # Lines are separated using "\n"
-            print(text[i], end="\n")
+            print(text[i],end="\n")
         # For Separating the Pages
         print()
-        t=open("textpdf.txt", "r+", encoding="utf-8")
+        t = open("text-reader.txt", "a", encoding="utf-8")
         t.writelines(text)
         t.close()
-        
 
- # open file button
+
+def clear_text_reader():
+    #open and clear text file
+    t = open("text-reader.txt", "w", encoding="utf-8")
+    t.flush()
+    t.close()
+    print("Fisierul text-reader este gol!")
+
+
+# open file button
 open_button = ttk.Button(
     root,
     text='Open a File',
@@ -64,7 +67,15 @@ clear_button = ttk.Button(
     command=clear_text_reader
 )
 
+# save search to excel
+excel_button = ttk.Button(
+    root,
+    text='Search and save to excel',
+    command=search_txt
+)
+
 open_button.grid(column=0, row=1, sticky='w', padx=10, pady=10)
 clear_button.grid(column=0, row=2, sticky='w', padx=10, pady=10)
+excel_button.grid(column=0, row=3, sticky='w', padx=10, pady=10)
 
 root.mainloop()
