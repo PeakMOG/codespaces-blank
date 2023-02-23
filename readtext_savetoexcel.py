@@ -1,6 +1,6 @@
 import re
 import openpyxl
-from filereaderclasses import Abonament
+from filereaderclasses import Abonament #not in use, ongoing
 
 def search_txt():
     file = open("text-reader.txt", "r")
