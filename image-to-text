@@ -1,0 +1,15 @@
+from PIL import Image
+import pytesseract as pty
+from pytesseract import pytesseract
+
+#define the path to the executable avoid an error
+pytesseract.tesseract_cmd = r'C:\Program Files\Tesseract-OCR\tesseract.exe' 
+
+img_file = 'images/scan_2.png'
+print ('Opening sample file')
+
+img_obj = Image.open(img_file)
+print ('Converting %s to string'%img_file)
+
+ret = pty.image_to_string(img_obj)
+print('Text is: ', ret)
